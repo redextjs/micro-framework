@@ -34,7 +34,7 @@ export const createMicroAppReact = (config = {}) => {
     }
   }
 
-  const { bootstrap, mount, unmount } = singleSpaReact({
+  const { bootstrap, mount, unmount, update } = singleSpaReact({
     React,
     ReactDOM,
     ...spaConfig,
@@ -44,7 +44,7 @@ export const createMicroAppReact = (config = {}) => {
     errorBoundary
   });
 
-  return { bootstrap, mount, unmount }
+  return { bootstrap, mount, unmount, update }
 }
 
 export const useMicroAppReact = () => {
