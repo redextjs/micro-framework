@@ -26,12 +26,8 @@ export const createMicroAppReact = (config = {}) => {
       if (isShadowRoot) {
         const containerElement = getContainerElement(container);
 
-        console.log('containerElement', containerElement, containerElement.shadowRoot)
-
         if (containerElement && containerElement.shadowRoot) {
           const shadowRoot = containerElement.shadowRoot;
-
-          console.log('shadowRoot.getElementById(rootId)', shadowRoot.getElementById(rootId))
 
           return shadowRoot.getElementById(rootId)
         }
