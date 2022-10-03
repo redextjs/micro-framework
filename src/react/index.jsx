@@ -18,6 +18,8 @@ export const createMicroAppReact = (config = {}) => {
 
   const microState = getMicroState(appName);
 
+  console.log('microState', microState)
+
   const { isShadowRoot, container } = microState;
 
   const {
