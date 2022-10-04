@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import singleSpaReact, { SingleSpaContext as MicroAppContext } from 'single-spa-react';
 import getMicroState from '../getMicroState';
-import * as helpers from '../helpers';
+import { getAppName, getContainerElement } from '../helpers';
 
 export const createMicroAppReact = (config = {}) => {
   const { rootId, styles, ...spaConfig } = config;
 
-  const appName = helpers.getAppName(rootId);
+  const appName = getAppName(rootId);
 
   const microState = getMicroState(appName);
 
@@ -19,7 +19,7 @@ export const createMicroAppReact = (config = {}) => {
     renderType = 'render',
     domElementGetter = () => {
       if (isShadowRoot) {
-        const containerElement = helpers.getContainerElement(container);
+        const containerElement = getContainerElement(container);
 
         if (containerElement && containerElement.shadowRoot) {
           const shadowRoot = containerElement.shadowRoot;

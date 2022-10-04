@@ -1,5 +1,3 @@
-import * as helpers from '../../helpers';
-
 function detectScriptRel() {
   // @ts-ignore
   const relList = document.createElement('link').relList
@@ -14,19 +12,15 @@ function preload(
   importerUrl
 ) {
   // @ts-ignore
-  if (!__VITE_IS_MODERN__ || !deps || deps.length === 0) {
+  if (!deps || deps.length === 0) {
     return baseModule()
   }
 
-  const rootId = '@redext-micro/cms-on'
-
-  const appName = helpers.getAppName(rootId);
-
-  const containerElement = document.querySelector(`div[data-name="${appName}"]`);
+  const containerElement = document.querySelector(`div[data-name="@${rootId}"]`);
 
   const documentTarget = containerElement && containerElement.shadowRoot || document;
 
-  const links = documentTarget.getElementsByTagName('link');
+  const links = documentTarget.getElementsByTagName ? documentTarget.getElementsByTagName('link') : documentTarget.querySelectorAll('link');
 
   const documentHead = documentTarget.head || documentTarget;
 
@@ -39,17 +33,18 @@ function preload(
       // @ts-ignore
       seen[dep] = true
       const isCss = dep.endsWith('.css')
-      const cssSelector = isCss ? '[rel="stylesheet"]' : ''
-      const isBaseRelative = !!importerUrl
+      const cssSelector = isCss ? '[rel="stylesheet"]' : '';
+      const isBaseRelative = !!importerUrl;
 
       if (isBaseRelative) {
         for (let i = links.length - 1; i >= 0; i--) {
-          const link = links[i]
+          const link = links[i];
+
           if (link.href === dep && (!isCss || link.rel === 'stylesheet')) {
             return
           }
         }
-      } else if (documentTarget.querySelector(`link[href="${dep}"]${cssSelector}`)) {
+      } else if (documentTarget.querySelector(`link[href="${dep}"]` + cssSelector)) {
         return
       }
 
@@ -77,7 +72,9 @@ function preload(
 const preloadMethod = `__vitePreload`;
 const preloadHelperId = '\0vite/preload-helper';
 
-const viteMicroConfigPlugin = ({ rootId }) => {
+const viteMicroConfigPlugin = (options = {}) => {
+  const { rootId } = options;
+
   let config;
 
   return {
@@ -105,7 +102,7 @@ const viteMicroConfigPlugin = ({ rootId }) => {
       const assetsURL = customModulePreloadPaths ? `function(dep, importerUrl) { return dep.startsWith('.') ? new URL(dep, importerUrl).href : dep }` : optimizeModulePreloadRelativePaths
         ? `function(dep, importerUrl) { return new URL(dep, importerUrl).href }` : `function(dep) { return ${JSON.stringify(config.base)}+dep }`;
 
-      const preloadCode = `const scriptRel = ${scriptRel}; const assetsURL = ${assetsURL}; const seen = {}; export const ${preloadMethod} = ${preload.toString()}`;
+      const preloadCode = `const scriptRel = ${scriptRel}; const assetsURL = ${assetsURL}; const rootId = ${JSON.stringify(rootId)}; const seen = {}; export const ${preloadMethod} = ${preload.toString()}`;
 
       if (id === preloadHelperId) {
         return preloadCode
