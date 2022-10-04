@@ -16,7 +16,8 @@ module.exports = ({ mode }) => {
       rollupOptions: {
         input: {
           index: './src',
-          react: './src/react'
+          react: './src/react',
+          // plugins: './src/plugins'
         },
         output: {
           format: 'cjs',
@@ -25,7 +26,7 @@ module.exports = ({ mode }) => {
             const { facadeModuleId, name } = params;
 
             if (facadeModuleId) {
-              const paths = facadeModuleId.match(/(.*)\/src\/(.*)\/(.*)\.jsx$/);
+              const paths = facadeModuleId.match(/(.*)\/src\/(.*)\/(.*)\.(jsx|js)$/);
 
               if (paths) {
                 const folder = paths[2];
