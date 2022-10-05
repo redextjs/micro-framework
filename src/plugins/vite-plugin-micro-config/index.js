@@ -16,7 +16,7 @@ function preload(
     return baseModule()
   }
 
-  const containerElement = document.querySelector(`div[data-name="@${rootId}"]`);
+  const containerElement = document.querySelector(`[data-name="@${rootId}:container"]`);
 
   const documentTarget = containerElement && containerElement.shadowRoot || document;
 

@@ -4,6 +4,10 @@ import singleSpaReact, { SingleSpaContext as MicroAppContext } from 'single-spa-
 import getMicroState from '../getMicroState';
 import { getAppName, getContainerElement } from '../helpers';
 
+const getElementApp = (documentTarget, rootId) => {
+  return documentTarget.getElementById ? documentTarget.getElementById(rootId) : documentTarget.querySelector(`[id="${rootId}"]`)
+}
+
 export const createMicroAppReact = (config = {}) => {
   const { rootId, styles, ...spaConfig } = config;
 
@@ -19,16 +23,16 @@ export const createMicroAppReact = (config = {}) => {
     renderType = 'render',
     domElementGetter = () => {
       if (isShadowRoot) {
-        const containerElement = getContainerElement(container);
+        const containerElement = getContainerElement(container) || getContainerElement(`[data-name="${appName}:container"]`);
 
         if (containerElement && containerElement.shadowRoot) {
           const shadowRoot = containerElement.shadowRoot;
 
-          return shadowRoot.getElementById(rootId)
+          return getElementApp(shadowRoot, rootId)
         }
       }
 
-      return document.getElementById(rootId)
+      return getElementApp(document, rootId)
     },
     errorBoundary = (err, info, props) => {
       console.error('createMicroApp err', err);

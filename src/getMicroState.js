@@ -5,7 +5,7 @@ const getMicroState = (appName) => {
     appName = __APP_NAME__
   }
 
-  const stateElement = document.querySelector(`#__REDEXT_MICRO_STATE__[data-name="${appName}"]`);
+  const stateElement = document.querySelector(`#__REDEXT_MICRO_STATE__[data-name="${appName}:state"]`);
 
   if (!stateElement) {
     return {}
