@@ -13,13 +13,15 @@ export const createMicroAppReact = (config = {}) => {
 
   const appName = getAppName(rootId);
 
-  const microState = getMicroState(appName);
-
-  const { isShadowRoot, container } = microState;
-
   const {
     renderType = 'render',
     domElementGetter = () => {
+      const microState = getMicroState(appName);
+
+      const { isShadowRoot, container } = microState;
+
+      console.log('microState', appName, microState)
+
       if (isShadowRoot) {
         const containerElement = getContainerElement(container) || getContainerElement(`[data-name="${appName}:container"]`);
 
@@ -65,7 +67,7 @@ export const createMicroAppReact = (config = {}) => {
     domElementGetter,
     errorBoundary
   });
-
+  ``
   return { bootstrap, mount, unmount, update }
 }
 
