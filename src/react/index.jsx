@@ -20,7 +20,7 @@ export const createMicroAppReact = (config = {}) => {
 
       const { isShadowRoot, container } = microState;
 
-      console.log('microState', appName, microState)
+      // console.log('microState', appName, microState);
 
       if (isShadowRoot) {
         const containerElement = getContainerElement(container) || getContainerElement(`[data-name="${appName}:container"]`);
