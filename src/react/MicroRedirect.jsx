@@ -9,9 +9,14 @@ const MicroRedirect = ({ appName }) => {
 
   const { pathname } = location;
 
-  const { redirectTo } = microState;
+  const { isKeepQuery = true } = microState;
+  let { redirectTo } = microState;
 
   if (redirectTo && pathname === '/') {
+    if (isKeepQuery) {
+      redirectTo += location.search
+    }
+
     return (
       <Redirect
         to={redirectTo}

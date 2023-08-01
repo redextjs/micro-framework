@@ -1,6 +1,6 @@
 {
   "name": "@redext/micro-framework",
-  "version": "0.0.1-staging-72",
+  "version": "0.0.1-staging-73",
   "main": "dist/index.js",
   "publishConfig": {
     "access": "public"
