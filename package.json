@@ -1,6 +1,6 @@
 {
   "name": "@redext/micro-framework",
-  "version": "0.0.1-staging-73",
+  "version": "0.0.1-staging-85",
   "main": "dist/index.js",
   "publishConfig": {
     "access": "public"
@@ -9,6 +9,8 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@redext/micro": "^0.0.1-staging-210",
+    "rxjs": "^7.8.1",
     "single-spa-react": "^4.6.1"
   },
   "devDependencies": {

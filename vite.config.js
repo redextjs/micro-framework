@@ -17,10 +17,15 @@ module.exports = ({ mode }) => {
         input: {
           index: './src',
           react: './src/react',
+          // 'react/hooks': './src/react/hooks',
+          'react/MicroComponent': './src/react/MicroComponent',
+          // 'react/MicroRedirect': './src/react/MicroRedirect',
+          // 'react/MicroRouter': './src/react/MicroRouter',
           // plugins: './src/plugins'
         },
         output: {
           format: 'cjs',
+          exports: 'named',
           entryFileNames: (params) => {
             // console.log('params', params);
             const { facadeModuleId, name } = params;
@@ -31,7 +36,9 @@ module.exports = ({ mode }) => {
               if (paths) {
                 const folder = paths[2];
 
-                return `${folder}/index.js`
+                const name = paths[3] || 'index';
+
+                return `${folder}/${name}.js`
               }
             }
 
@@ -45,6 +52,8 @@ module.exports = ({ mode }) => {
           'react-dom',
           // 'react-router',
           'react-router-dom',
+          '@redext/micro',
+          'rxjs',
           // 'single-spa-react'
         ]
       }

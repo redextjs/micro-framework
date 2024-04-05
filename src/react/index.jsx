@@ -4,6 +4,8 @@ import singleSpaReact, { SingleSpaContext as MicroAppContext } from 'single-spa-
 import getMicroState from '../getMicroState';
 import { getAppName, getContainerElement } from '../helpers';
 
+import useMicroAppReact from './hooks/useMicroAppReact';
+
 const getElementApp = (documentTarget, rootId) => {
   return documentTarget.getElementById ? documentTarget.getElementById(rootId) : documentTarget.querySelector(`[id="${rootId}"]`)
 }
@@ -71,10 +73,6 @@ export const createMicroAppReact = (config = {}) => {
   return { bootstrap, mount, unmount, update }
 }
 
-export const useMicroAppReact = () => {
-  return useContext(MicroAppContext)
-};
-
 export const withMicroStyles = (styles) => {
   return Component => {
     class MicroComponent extends React.PureComponent {
@@ -97,5 +95,6 @@ export const withMicroStyles = (styles) => {
 }
 
 export {
-  MicroAppContext
+  MicroAppContext,
+  useMicroAppReact
 }

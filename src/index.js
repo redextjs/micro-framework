@@ -4,5 +4,7 @@ export { createMicroAppReact, useMicroAppReact, MicroAppContext, withMicroStyles
 export { default as MicroRouter } from './react/MicroRouter';
 export { default as MicroRedirect } from './react/MicroRedirect';
 export { default as MicroComponent } from './react/MicroComponent';
+export { default as MicroPortal } from './react/MicroPortal';
 
 export { default as viteMicroConfig } from './plugins/vite-plugin-micro-config';
+export { getRootId, getAppName, isMountApp, getContainerElement, isMicro } from './helpers';
