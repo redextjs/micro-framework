@@ -1,4 +1,4 @@
-import React, { useEffect, isValidElement } from 'react';
+import React, { useEffect, isValidElement, useRef } from 'react';
 import { registerMicroApp } from '@redext/micro';
 import { ReplaySubject } from 'rxjs';
 
@@ -17,6 +17,8 @@ export const MicroComponent = (props) => {
     ...registerProps
   } = props;
 
+  const containerRef = useRef();
+
   if (microSubjectRef) {
     if (!microSubjectRef.current) {
       microSubjectRef.current = new ReplaySubject();
@@ -30,21 +32,23 @@ export const MicroComponent = (props) => {
   }
 
   useEffect(() => {
-    registerMicroApp({
-      name,
-      activePath,
-      staticPath,
-      redirectTo,
-      container: `#${microId}`,
-      isHash: true,
-      isShadowRoot: false,
-      props: microProps,
-      ...registerProps
-    })
+    setTimeout(() => {
+      registerMicroApp({
+        name,
+        activePath,
+        staticPath,
+        redirectTo,
+        container: `#${microId}`,
+        isHash: true,
+        isShadowRoot: false,
+        props: microProps,
+        ...registerProps
+      });
+    }, 0)
   }, [redirectTo])
 
   const element = (
-    <div id={microId} className="micro-component"/>
+    <div ref={containerRef} id={microId} className="micro-component"/>
   )
 
   if (Container && isValidElement(Container)) {
