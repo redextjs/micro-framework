@@ -1,6 +1,6 @@
 {
   "name": "@redext/micro-framework",
-  "version": "0.0.1-staging-89",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "publishConfig": {
     "access": "public"
@@ -9,11 +9,12 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@redext/micro": "^0.0.1-staging-210",
+    "@redext/micro": "^0.0.2",
     "rxjs": "^7.8.1",
     "single-spa-react": "^6.0.1"
   },
   "devDependencies": {
     "vite": "^5.2.8"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
