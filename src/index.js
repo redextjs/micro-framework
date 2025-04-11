@@ -7,4 +7,4 @@ export { default as MicroComponent } from './react/MicroComponent';
 export { default as MicroPortal } from './react/MicroPortal';
 
 export { default as viteMicroConfig } from './plugins/vite-plugin-micro-config';
-export { getRootId, getAppName, isMountApp, getContainerElement, isMicro } from './helpers';
+export { getRootId, getAppName, isMountApp, getContainerElement, isMicro, getDocumentTarget } from './helpers';
